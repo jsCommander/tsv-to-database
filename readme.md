@@ -1,9 +1,9 @@
 This package help you to convert csv/tsv files to js object.
 
-#Installation:
+## Installation:
 coming soon...
 
-#Example of usage:
+## Example of usage:
 
 This example read stream from tsv file and write it to sqlite database
 ```
@@ -26,16 +26,16 @@ fs.createReadStream(tsvFilePath)
   .pipe(new SqliteWriteStream(dataBaseName));
 ```
 
-#Documentation
+## Documentation
 
-## TsvToJsonTransformStream
+### TsvToJsonTransformStream
 coming soon...
 
-## SqliteWriteStream
+### SqliteWriteStream
 coming soon...
 
-## ProgressTransformStream
+### ProgressTransformStream
 coming soon...
 
-## FilterTransformStream
+### FilterTransformStream
 coming soon...
