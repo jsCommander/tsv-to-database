@@ -15,10 +15,11 @@ if (fs.existsSync(dataBaseName)) {
 }
 
 const fileSize = fs.statSync(tsvFilePath).size;
+
 const input = fs.createReadStream(tsvFilePath);
 const filter = obj => !obj.food.includes('Almonds');
 
-input
+fs.createReadStream(tsvFilePath)
   .pipe(new ProgressTransformStream(fileSize))
   .pipe(new TsvToJsonTransformStream())
   .pipe(new FilterTransformStream(filter))
