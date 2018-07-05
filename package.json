@@ -1,12 +1,12 @@
 {
-  "name": "tsv-to-json",
+  "name": "tsv-to-sqlite",
   "version": "0.0.1",
   "description": "Read tsv/csv stream and transform it to js objects stream. Can write object stream into database ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "jscommander",
+  "author": "js-commander",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^4.1.4"
