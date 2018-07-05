@@ -1,6 +1,6 @@
 {
   "name": "tsv-to-sqlite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Read tsv/csv stream and transform it to js objects stream. Can write object stream into database ",
   "main": "index.js",
   "scripts": {
