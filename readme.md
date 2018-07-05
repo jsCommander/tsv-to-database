@@ -1,5 +1,5 @@
 ## Description:
-This package help you to convert csv/tsv files to js object.
+This package help you to convert csv/tsv files to js object and write it to sqlite database.
 
 ## Installation:
 ```
@@ -18,8 +18,8 @@ const {
   SqliteWriteStream,
 } = require('tsv-to-sqlite');
 
-const tsvFilePath = './tests/cal.tsv';
-const dataBaseName = './tests/cal.db';
+const tsvFilePath = './cal.tsv';
+const dbName = './cal.db';
 
 const fileSize = fs.statSync(tsvFilePath).size;
 
@@ -29,7 +29,7 @@ fs.createReadStream(tsvFilePath)
   .pipe(new SqliteWriteStream(dataBaseName));
 ```
 
-This example download tsv file from imdb and write it at database.
+This example open download stream from imdb and write it at database. Filter function is used to filter only movies from stream. 
 ```javascript
 const zlib = require('zlib');
 const request = require('request');
@@ -41,7 +41,7 @@ const {
   SqliteWriteStream,
 } = require('tsv-to-sqlite');
 
-const dbName = 'movie.db';
+const dbName = './movie.db';
 const filter = obj => obj.titleType === 'movie';
 
 request.get('https://datasets.imdbws.com/title.basics.tsv.gz').on('response', response => {
