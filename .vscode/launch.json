@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/tests/readFileFromDisk.js",
+            "program": "${workspaceFolder}/dist/test.js",
             "console": "integratedTerminal"
         }
     ]
