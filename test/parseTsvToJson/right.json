@@ -1,0 +1,191 @@
+[
+  {
+    "Food": "All-Bran Cereal",
+    "Measure": "1 oz",
+    "Weight_(g)": 28.35,
+    "kCal": 70,
+    "Fat_(g)": 1,
+    "Carbo(g)": 21,
+    "Protein_(g)": 4
+  },
+  {
+    "Food": "Almonds, Slivered",
+    "Measure": "1 Cup",
+    "Weight_(g)": 135,
+    "kCal": 795,
+    "Fat_(g)": 70,
+    "Carbo(g)": 28,
+    "Protein_(g)": 27
+  },
+  {
+    "Food": "Almonds, Whole",
+    "Measure": "1 oz",
+    "Weight_(g)": 28.35,
+    "kCal": 165,
+    "Fat_(g)": 15,
+    "Carbo(g)": 6,
+    "Protein_(g)": 6
+  },
+  {
+    "Food": "Angelfood Cake, From Mix",
+    "Measure": "1 Cake",
+    "Weight_(g)": 635,
+    "kCal": 1510,
+    "Fat_(g)": 2,
+    "Carbo(g)": 342,
+    "Protein_(g)": 38
+  },
+  {
+    "Food": "Angelfood Cake, From Mix",
+    "Measure": "1 Piece",
+    "Weight_(g)": 53,
+    "kCal": 125,
+    "Fat_(g)": 0,
+    "Carbo(g)": 29,
+    "Protein_(g)": 3
+  },
+  {
+    "Food": "Apple Juice, Canned",
+    "Measure": "1 Cup",
+    "Weight_(g)": 248,
+    "kCal": 115,
+    "Fat_(g)": 0,
+    "Carbo(g)": 29,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Apple Pie",
+    "Measure": "1 Pie",
+    "Weight_(g)": 945,
+    "kCal": 2420,
+    "Fat_(g)": 105,
+    "Carbo(g)": 360,
+    "Protein_(g)": 21
+  },
+  {
+    "Food": "Apple Pie",
+    "Measure": "1 Piece",
+    "Weight_(g)": 158,
+    "kCal": 405,
+    "Fat_(g)": 18,
+    "Carbo(g)": 60,
+    "Protein_(g)": 3
+  },
+  {
+    "Food": "Apples, Dried, Sulfured",
+    "Measure": "10 Rings",
+    "Weight_(g)": 64,
+    "kCal": 155,
+    "Fat_(g)": 0,
+    "Carbo(g)": 42,
+    "Protein_(g)": 1
+  },
+  {
+    "Food": "Apples, Raw, Peeled, Sliced",
+    "Measure": "1 Cup",
+    "Weight_(g)": 110,
+    "kCal": 65,
+    "Fat_(g)": 0,
+    "Carbo(g)": 16,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Apples, Raw, Unpeeled,2 Per Lb",
+    "Measure": "1 Apple",
+    "Weight_(g)": 212,
+    "kCal": 125,
+    "Fat_(g)": 1,
+    "Carbo(g)": 32,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Apples, Raw, Unpeeled,3 Per Lb",
+    "Measure": "1 Apple",
+    "Weight_(g)": 138,
+    "kCal": 80,
+    "Fat_(g)": 0,
+    "Carbo(g)": 21,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Applesauce, Canned, Sweetened",
+    "Measure": "1 Cup",
+    "Weight_(g)": 255,
+    "kCal": 195,
+    "Fat_(g)": 0,
+    "Carbo(g)": 51,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Applesauce, Canned,Unsweetened",
+    "Measure": "1 Cup",
+    "Weight_(g)": 244,
+    "kCal": 105,
+    "Fat_(g)": 0,
+    "Carbo(g)": 28,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Apricot Nectar, No Added Vit C",
+    "Measure": "1 Cup",
+    "Weight_(g)": 251,
+    "kCal": 140,
+    "Fat_(g)": 0,
+    "Carbo(g)": 36,
+    "Protein_(g)": 1
+  },
+  {
+    "Food": "Apricot, Canned, Heavy Syrup",
+    "Measure": "1 Cup",
+    "Weight_(g)": 258,
+    "kCal": 215,
+    "Fat_(g)": 0,
+    "Carbo(g)": 55,
+    "Protein_(g)": 1
+  },
+  {
+    "Food": "Apricot, Canned, Heavy Syrup",
+    "Measure": "3 Halves",
+    "Weight_(g)": 85,
+    "kCal": 70,
+    "Fat_(g)": 0,
+    "Carbo(g)": 18,
+    "Protein_(g)": 0
+  },
+  {
+    "Food": "Apricots, Canned, Juice Pack",
+    "Measure": "1 Cup",
+    "Weight_(g)": 248,
+    "kCal": 120,
+    "Fat_(g)": 0,
+    "Carbo(g)": 31,
+    "Protein_(g)": 2
+  },
+  {
+    "Food": "Apricots, Canned, Juice Pack",
+    "Measure": "3 Halves",
+    "Weight_(g)": 84,
+    "kCal": 40,
+    "Fat_(g)": 0,
+    "Carbo(g)": 10,
+    "Protein_(g)": 1
+  },
+  {
+    "Food": "Apricots, Dried, Cooked,Unswtn",
+    "Measure": "1 Cup",
+    "Weight_(g)": 250,
+    "kCal": 210,
+    "Fat_(g)": 0,
+    "Carbo(g)": 55,
+    "Protein_(g)": 3
+  },
+  {
+    "Food": "Apricots, Dried, Uncooked",
+    "Measure": "1 Cup",
+    "Weight_(g)": 130,
+    "kCal": 310,
+    "Fat_(g)": 1,
+    "Carbo(g)": 80,
+    "Protein_(g)": 5
+  }
+]

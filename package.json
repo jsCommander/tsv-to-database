@@ -4,11 +4,24 @@
   "description": "Read tsv/csv stream and transform it to js objects stream. Can write object stream into database ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "tsc --watch",
+    "test": "jest --coverage --verbose"
   },
   "author": "js-commander",
   "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^4.1.4"
+    "better-sqlite3": "^4.2.0",
+    "mongodb": "^3.1.10"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^5.2.1",
+    "@types/jest": "^23.3.11",
+    "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2"
   }
 }
