@@ -1,8 +1,8 @@
-## Description:
+# Description:
 
 This package help you to convert csv/tsv files to js object and write it to sqlite database.
 
-## Installation:
+# Installation:
 
 ```
 npm install tsv-to-sqlite --save
