@@ -74,3 +74,6 @@ typings/
 
 #vs code config
 .vscode
+
+# dist folder
+/dist
