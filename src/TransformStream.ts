@@ -1,7 +1,18 @@
 import { Transform } from "stream";
 import { IParsedObject, nodeCallback } from "./types";
-
+/**
+ * This class can transform all objects in stream.
+ *
+ * @export
+ * @class TransformStream
+ * @extends {Transform}
+ */
 export class TransformStream extends Transform {
+  /**
+   * Creates an instance of TransformStream.
+   * @param transform function that transform object to another object
+   * @memberof TransformStream
+   */
   constructor(private transform: (object: IParsedObject) => IParsedObject) {
     super({ objectMode: true });
   }

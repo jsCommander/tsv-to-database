@@ -1,7 +1,7 @@
 {
-  "name": "tsv-to-sqlite",
-  "version": "0.0.2",
-  "description": "Read tsv/csv stream and transform it to js objects stream. Can write object stream into database ",
+  "name": "tsv-to-database",
+  "version": "0.1.2",
+  "description": "Read tsv/csv stream and transform it to js objects stream. Can write object stream into mongo and sqlite database",
   "main": "index.js",
   "scripts": {
     "start": "npm run build:live",
@@ -13,12 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^4.2.0",
-    "mongodb": "^3.1.10"
+    "mongodb": "^3.1.10",
+    "progress": "^2.0.3"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^5.2.1",
     "@types/jest": "^23.3.11",
+    "@types/mongodb": "^3.1.18",
     "@types/node": "^10.12.18",
+    "@types/progress": "^2.0.3",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
     "tslint-config-prettier": "^1.17.0",

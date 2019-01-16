@@ -1,6 +1,6 @@
 import sqlite3 from "better-sqlite3";
 import fs from "fs";
-import { SqlWriteStream, TsvToObjectStream } from "../../src/index";
+import { SqliteWriteStream, TsvToObjectStream } from "../../src/index";
 
 describe("convert tsv file to sqlite3 database", () => {
   it("shoud correctly parse tsv file and convert it in sqlite3 database", () => {
@@ -13,7 +13,7 @@ describe("convert tsv file to sqlite3 database", () => {
     fs.createReadStream(tsvFilePath)
       .pipe(new TsvToObjectStream())
       .pipe(
-        new SqlWriteStream({
+        new SqliteWriteStream({
           databasePath: `${__dirname}/output.db`,
           tableName: "food"
         })
