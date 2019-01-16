@@ -1,7 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const stream_1 = require("stream");
+/**
+ * This class can filter stream. Only objects that pass filter function will be piped to next stream
+ *
+ * @export
+ * @class FilterStream
+ * @extends {Transform}
+ */
 class FilterStream extends stream_1.Transform {
+    /**
+     * Creates an instance of FilterStream.
+     * @param filter function that will be used to filter stream
+     * @memberof FilterStream
+     */
     constructor(filter) {
         super({ objectMode: true });
         this.filter = filter;

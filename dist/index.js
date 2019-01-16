@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const FilterStream_1 = require("./FilterStream");
 exports.FilterStream = FilterStream_1.FilterStream;
+const MongoWriteStream_1 = require("./MongoWriteStream");
+exports.MongoWriteStream = MongoWriteStream_1.MongoWriteStream;
 const ObjectToJsonStream_1 = require("./ObjectToJsonStream");
 exports.ObjectToJsonStream = ObjectToJsonStream_1.ObjectToJsonStream;
 const ProgressStream_1 = require("./ProgressStream");

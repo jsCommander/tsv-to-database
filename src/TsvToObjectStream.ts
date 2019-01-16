@@ -3,7 +3,6 @@ import { TsvParser } from "./TsvParser";
 import { IParsedObject, nodeCallback } from "./types";
 
 type parsingTypes = "number" | "string";
-
 interface ITsvToObjectStreamOptions {
   stringEncoding?: string;
   ignoreFirstLine?: boolean;
@@ -12,9 +11,12 @@ interface ITsvToObjectStreamOptions {
   columns?: string[];
   types?: parsingTypes[];
 }
-
 /**
- * Transform stream from .tsv files to JSON object
+ * This class can make objects from byte stream
+ *
+ * @export
+ * @class TsvToObjectStream
+ * @extends {Transform}
  */
 export class TsvToObjectStream extends Transform {
   private parsedCounter: number = 0;
@@ -65,8 +67,9 @@ export class TsvToObjectStream extends Transform {
           );
         }
       }
+    } else {
+      this.parser = new TsvParser();
     }
-    this.parser = new TsvParser();
   }
 
   public _transform(
@@ -74,7 +77,6 @@ export class TsvToObjectStream extends Transform {
     encoding: string,
     callback: nodeCallback
   ): void {
-    // if user provide us encoding than use it
     const enc = encoding === "buffer" ? this.stringEncoding : encoding;
     const str = chunk.toString(enc);
 
@@ -88,12 +90,23 @@ export class TsvToObjectStream extends Transform {
       const first = parsed.shift();
       if (first) {
         this.columns = first.map(x => this.parser.sanitizeString(x));
+        if (this.columns.length === 1) {
+          callback(
+            new Error(
+              `Can't parse columns, found only one column. Check rowSeparator.`
+            )
+          );
+        }
         this.parseColumns = false;
         this.parsedCounter += 1;
-        console.log(`Found columns: ${this.columns.join(", ")}`);
+        console.log(
+          `Found ${this.columns.length} columns: ${this.columns.join(", ")}`
+        );
       } else {
         callback(
-          new Error(`Can't parse columns because didn't found first line`)
+          new Error(
+            `Can't parse columns because didn't found first line. Check lineSeparator.`
+          )
         );
       }
     }
@@ -103,13 +116,15 @@ export class TsvToObjectStream extends Transform {
       if (first) {
         this.types = first.map(x => this._guessType(x));
         this.parseTypes = false;
-        console.log(`Found types: ${this.types.join(", ")}`);
+        console.log(
+          `Found ${this.types.length} types: ${this.types.join(", ")}`
+        );
       }
     }
 
     const objectsArray = parsed.map(item => {
       this.parsedCounter += 1;
-      return this._stringArrayToObject(item);
+      return this._stringArrayToObject(item, callback);
     });
 
     this.push(objectsArray);
@@ -120,7 +135,7 @@ export class TsvToObjectStream extends Transform {
     const parserBuffer = this.parser.getBuffered();
     if (parserBuffer) {
       const parsed = this.parser.parseLine(parserBuffer);
-      const obj = this._stringArrayToObject(parsed);
+      const obj = this._stringArrayToObject(parsed, callback);
       this.push([obj]);
     }
     callback();
@@ -131,15 +146,23 @@ export class TsvToObjectStream extends Transform {
     return isNumber.test(str) ? "number" : "string";
   }
 
-  private _stringArrayToObject(stringArray: string[]): IParsedObject {
+  private _stringArrayToObject(
+    stringArray: string[],
+    callback: nodeCallback
+  ): IParsedObject {
     const obj: IParsedObject = {};
-    if (this.columns.length !== stringArray.length) {
-      console.log(
-        `Warning line ${this.parsedCounter}: I have ${
+
+    if (stringArray.length !== this.columns.length) {
+      const str = stringArray.length > this.columns.length ? "more" : "less";
+      console.error(
+        `Error at line ${
+          this.parsedCounter
+        }: line have ${str} columns then expected. Expected: ${
           this.columns.length
-        } columns but line have ${stringArray.length} columns`
+        }, found: ${stringArray.length}`
       );
     }
+
     stringArray.forEach((item, index) => {
       let typedItem: string | number | boolean = item;
       let header = this.columns[index];
@@ -152,10 +175,11 @@ export class TsvToObjectStream extends Transform {
         if (!isNaN(parsed)) {
           typedItem = parsed;
         } else {
-          console.log(
-            `Warning line ${
+          this.types[index] = "string";
+          console.error(
+            `Error at line ${
               this.parsedCounter
-            }: tried to convert "${item}" to number but recived NaN`
+            }: tried to convert "${item}" to number but recived NaN. Changing type for string`
           );
         }
       }

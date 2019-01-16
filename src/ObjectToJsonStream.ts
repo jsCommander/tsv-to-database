@@ -1,6 +1,12 @@
 import { Transform } from "stream";
 import { IParsedObject, nodeCallback } from "./types";
-
+/**
+ * This class can convert object stream to json string
+ *
+ * @export
+ * @class ObjectToJsonStream
+ * @extends {Transform}
+ */
 export class ObjectToJsonStream extends Transform {
   private isFirstChunk: boolean = true;
   constructor() {

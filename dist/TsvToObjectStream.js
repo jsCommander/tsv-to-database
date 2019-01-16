@@ -3,7 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const stream_1 = require("stream");
 const TsvParser_1 = require("./TsvParser");
 /**
- * Transform stream from .tsv files to JSON object
+ * This class can make objects from byte stream
+ *
+ * @export
+ * @class TsvToObjectStream
+ * @extends {Transform}
  */
 class TsvToObjectStream extends stream_1.Transform {
     constructor(options) {
@@ -43,10 +47,11 @@ class TsvToObjectStream extends stream_1.Transform {
                 }
             }
         }
-        this.parser = new TsvParser_1.TsvParser();
+        else {
+            this.parser = new TsvParser_1.TsvParser();
+        }
     }
     _transform(chunk, encoding, callback) {
-        // if user provide us encoding than use it
         const enc = encoding === "buffer" ? this.stringEncoding : encoding;
         const str = chunk.toString(enc);
         const parsed = this.parser.parseTextToLines(str);
@@ -58,12 +63,15 @@ class TsvToObjectStream extends stream_1.Transform {
             const first = parsed.shift();
             if (first) {
                 this.columns = first.map(x => this.parser.sanitizeString(x));
+                if (this.columns.length === 1) {
+                    callback(new Error(`Can't parse columns, found only one column. Check rowSeparator.`));
+                }
                 this.parseColumns = false;
                 this.parsedCounter += 1;
-                console.log(`Found columns: ${this.columns.join(", ")}`);
+                console.log(`Found ${this.columns.length} columns: ${this.columns.join(", ")}`);
             }
             else {
-                callback(new Error(`Can't parse columns because didn't found first line`));
+                callback(new Error(`Can't parse columns because didn't found first line. Check lineSeparator.`));
             }
         }
         if (this.parseTypes) {
@@ -71,12 +79,12 @@ class TsvToObjectStream extends stream_1.Transform {
             if (first) {
                 this.types = first.map(x => this._guessType(x));
                 this.parseTypes = false;
-                console.log(`Found types: ${this.types.join(", ")}`);
+                console.log(`Found ${this.types.length} types: ${this.types.join(", ")}`);
             }
         }
         const objectsArray = parsed.map(item => {
             this.parsedCounter += 1;
-            return this._stringArrayToObject(item);
+            return this._stringArrayToObject(item, callback);
         });
         this.push(objectsArray);
         callback();
@@ -85,7 +93,7 @@ class TsvToObjectStream extends stream_1.Transform {
         const parserBuffer = this.parser.getBuffered();
         if (parserBuffer) {
             const parsed = this.parser.parseLine(parserBuffer);
-            const obj = this._stringArrayToObject(parsed);
+            const obj = this._stringArrayToObject(parsed, callback);
             this.push([obj]);
         }
         callback();
@@ -94,10 +102,11 @@ class TsvToObjectStream extends stream_1.Transform {
         const isNumber = /^-?\d+[\.\,]?\d*$/g;
         return isNumber.test(str) ? "number" : "string";
     }
-    _stringArrayToObject(stringArray) {
+    _stringArrayToObject(stringArray, callback) {
         const obj = {};
-        if (this.columns.length !== stringArray.length) {
-            console.log(`Warning line ${this.parsedCounter}: I have ${this.columns.length} columns but line have ${stringArray.length} columns`);
+        if (stringArray.length !== this.columns.length) {
+            const str = stringArray.length > this.columns.length ? "more" : "less";
+            console.error(`Error at line ${this.parsedCounter}: line have ${str} columns then expected. Expected: ${this.columns.length}, found: ${stringArray.length}`);
         }
         stringArray.forEach((item, index) => {
             let typedItem = item;
@@ -112,7 +121,8 @@ class TsvToObjectStream extends stream_1.Transform {
                     typedItem = parsed;
                 }
                 else {
-                    console.log(`Warning line ${this.parsedCounter}: tried to convert "${item}" to number but recived NaN`);
+                    this.types[index] = "string";
+                    console.error(`Error at line ${this.parsedCounter}: tried to convert "${item}" to number but recived NaN. Changing type for string`);
                 }
             }
             obj[header] = typedItem;

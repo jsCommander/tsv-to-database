@@ -1,6 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const stream_1 = require("stream");
+/**
+ * This class can convert object stream to json string
+ *
+ * @export
+ * @class ObjectToJsonStream
+ * @extends {Transform}
+ */
 class ObjectToJsonStream extends stream_1.Transform {
     constructor() {
         super({ objectMode: true });

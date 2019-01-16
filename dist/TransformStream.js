@@ -1,7 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const stream_1 = require("stream");
+/**
+ * This class can transform all objects in stream.
+ *
+ * @export
+ * @class TransformStream
+ * @extends {Transform}
+ */
 class TransformStream extends stream_1.Transform {
+    /**
+     * Creates an instance of TransformStream.
+     * @param transform function that transform object to another object
+     * @memberof TransformStream
+     */
     constructor(transform) {
         super({ objectMode: true });
         this.transform = transform;

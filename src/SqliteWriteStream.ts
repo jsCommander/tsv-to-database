@@ -7,8 +7,15 @@ interface ISqliteStreamOptions {
   tableName?: string;
   insertTemplate?: string;
   createTemplate?: string;
+  isTableCreated?: boolean;
 }
-
+/**
+ * This class can write stream to sqlite database
+ *
+ * @export
+ * @class SqliteWriteStream
+ * @extends {Writable}
+ */
 export class SqliteWriteStream extends Writable {
   private insertTemplate: string =
     "INSERT INTO {{table}} ({{columns}}) VALUES ({{values}});";
@@ -29,7 +36,8 @@ export class SqliteWriteStream extends Writable {
         insertTemplate,
         tableName,
         createTemplate,
-        databasePath
+        databasePath,
+        isTableCreated
       } = options;
       if (tableName) {
         this.tableName = tableName;
@@ -37,15 +45,12 @@ export class SqliteWriteStream extends Writable {
       if (databasePath) {
         this.databasePath = databasePath;
       }
+      if (isTableCreated) {
+        this.isTableCreated = isTableCreated;
+      }
       if (insertTemplate) {
-        if (insertTemplate.includes("{{values}}")) {
-          this.insertTemplate = insertTemplate;
-          this.isInsertSqlReady = true;
-        } else {
-          throw new Error(
-            "SQL template does not contain '{{values}}' so I don't know where I need to put values"
-          );
-        }
+        this.insertTemplate = insertTemplate;
+        this.isInsertSqlReady = true;
       }
       if (createTemplate) {
         this.createTemplate = createTemplate;

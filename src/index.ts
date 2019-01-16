@@ -1,4 +1,5 @@
 import { FilterStream } from "./FilterStream";
+import { MongoWriteStream } from "./MongoWriteStream";
 import { ObjectToJsonStream } from "./ObjectToJsonStream";
 import { ProgressStream } from "./ProgressStream";
 import { SqliteWriteStream } from "./SqliteWriteStream";
@@ -11,5 +12,6 @@ export {
   TsvToObjectStream,
   ObjectToJsonStream,
   SqliteWriteStream,
-  ProgressStream
+  ProgressStream,
+  MongoWriteStream
 };

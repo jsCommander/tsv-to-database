@@ -5,6 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const better_sqlite3_1 = __importDefault(require("better-sqlite3"));
 const stream_1 = require("stream");
+/**
+ * This class can write stream to sqlite database
+ *
+ * @export
+ * @class SqliteWriteStream
+ * @extends {Writable}
+ */
 class SqliteWriteStream extends stream_1.Writable {
     constructor(options) {
         super({ objectMode: true });
@@ -16,21 +23,19 @@ class SqliteWriteStream extends stream_1.Writable {
         this.databasePath = `${__dirname}/output.db`;
         this.tableName = "parsed_tsv";
         if (options) {
-            const { insertTemplate, tableName, createTemplate, databasePath } = options;
+            const { insertTemplate, tableName, createTemplate, databasePath, isTableCreated } = options;
             if (tableName) {
                 this.tableName = tableName;
             }
             if (databasePath) {
                 this.databasePath = databasePath;
             }
+            if (isTableCreated) {
+                this.isTableCreated = isTableCreated;
+            }
             if (insertTemplate) {
-                if (insertTemplate.includes("{{values}}")) {
-                    this.insertTemplate = insertTemplate;
-                    this.isInsertSqlReady = true;
-                }
-                else {
-                    throw new Error("SQL template does not contain '{{values}}' so I don't know where I need to put values");
-                }
+                this.insertTemplate = insertTemplate;
+                this.isInsertSqlReady = true;
             }
             if (createTemplate) {
                 this.createTemplate = createTemplate;
